@@ -19,7 +19,16 @@ def get_db_connection():
         password=os.getenv("DB_PASSWORD"),
         database=os.getenv("DB_DATABASE", "defaultdb"),
         cursorclass=pymysql.cursors.DictCursor,
-        ssl={"ssl_disabled": False},
+        ssl={"ssl": {}},
+        connect_timeout=10,
+    )
+
+
+@app.route("/", methods=["GET"])
+def index():
+    return (
+        jsonify({"success": True, "message": "Nasbak API Backend Flask is running"}),
+        200,
     )
 
 
